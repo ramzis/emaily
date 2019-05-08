@@ -8,13 +8,13 @@
     "npm": "6.9.0"
   },
   "scripts": {
-    "start": "npm run prod",
-    "server": "babel-node ./src",
-    "server:prod": "node ./dist",
-    "dev": "NODE_ENV=development npm-run-all server",
+    "build": "npm run prod",
+    "prod": "NODE_ENV=production npm-run-all clean build-babel",
     "clean": "rimraf dist",
-    "build": "babel ./src --out-dir dist",
-    "prod": "NODE_ENV=production npm-run-all clean build server:prod",
+    "build-babel": "babel ./src --out-dir dist",
+    "start": "node ./dist",
+    "dev": "NODE_ENV=development npm-run-all server",
+    "server": "babel-node ./src",
     "watch": "nodemon"
   },
   "author": "",
