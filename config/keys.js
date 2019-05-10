@@ -1,5 +1,3 @@
-if (process.env.NODE_ENV === "production") {
-  export default from "./prod";
-} else {
-  export default from "./dev";
-}
+module.exports = require(process.env.NODE_ENV === "production"
+  ? "./prod"
+  : "./dev");
