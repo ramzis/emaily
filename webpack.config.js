@@ -3,7 +3,7 @@ const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
   entry: {
-    server: "./src/index.js"
+    server: ["@babel/polyfill", "./src/index.js"]
   },
   output: {
     path: path.join(__dirname, "dist"),
