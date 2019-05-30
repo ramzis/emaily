@@ -9,7 +9,9 @@ import billingRoutes from "./routes/billingRoutes";
 import "./models/User";
 import "./services/passport";
 
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true }, error => {
+  if (error) console.log(error);
+});
 
 const app = express();
 
@@ -25,6 +27,14 @@ app.use(passport.session());
 
 authRoutes(app);
 billingRoutes(app);
+
+if (process.env.NODE_ENV === "production") {
+  const root = require("path").join(__dirname, "../client", "build");
+  app.use(express.static(root));
+  app.get("*", (req, res) => {
+    res.sendFile("index.html", { root });
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);

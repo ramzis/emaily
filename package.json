@@ -8,14 +8,12 @@
     "npm": "6.9.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon --exec babel-node src/index.js",
-    "npm:rm": "rm -rf ./node_modules",
-    "start": "NODE_ENV='production' node dist/index.js",
+    "start": "node src/dist/index.js",
     "build": "webpack --mode production",
-    "prod": "npm run build && rm -rf ./src && npm start",
-    "client": "npm run start --prefix ./src/client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "server": "nodemon --exec babel-node src/index.js",
+    "client": "npm run start --prefix src/client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix src/client && npm run build --prefix src/client"
   },
   "author": "",
   "license": "ISC",
@@ -25,12 +23,12 @@
     "concurrently": "^4.1.0",
     "cookie-session": "^1.3.3",
     "debug": "^4.1.1",
-    "express": "^4.16.4",
-    "mongoose": "^5.5.7",
+    "express": "^4.17.1",
+    "mongoose": "^5.5.11",
     "npm-run-all": "^4.1.5",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
-    "stripe": "^7.0.1"
+    "stripe": "^7.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -38,7 +36,7 @@
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.4",
     "babel-loader": "^8.0.5",
-    "nodemon": "^1.19.0",
+    "nodemon": "^1.19.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.2",
     "webpack-node-externals": "^1.7.2"
