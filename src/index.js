@@ -4,10 +4,12 @@ import cookieSession from "cookie-session";
 import passport from "passport";
 import bodyParser from "body-parser";
 import keys from "./config/keys";
+import "./models/User";
+import "./models/Survey";
+import "./services/passport";
 import authRoutes from "./routes/authRoutes";
 import billingRoutes from "./routes/billingRoutes";
-import "./models/User";
-import "./services/passport";
+import surveyRoutes from "./routes/surveyRoutes";
 
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true }, error => {
   if (error) console.log(error);
@@ -27,6 +29,7 @@ app.use(passport.session());
 
 authRoutes(app);
 billingRoutes(app);
+surveyRoutes(app);
 
 if (process.env.NODE_ENV === "production") {
   const root = require("path").join(__dirname, "../client", "build");
